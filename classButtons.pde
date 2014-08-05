@@ -50,11 +50,12 @@ public class MyButton {
 
   public void draw() {
     rectMode(CORNER);
+    stroke(0);
     if (buttonClicked == true)
-      fill(clickedColor);
+      stroke(clickedColor);
     if (buttonClicked == false)
       fill(unClickedColor);
-    stroke(0);
+    
     strokeWeight(3);
     noFill();
     //ellipseMode(CORNER); 
@@ -101,6 +102,7 @@ public class MyButton {
       if (inHere == true)
       {
         inHere = false;
+        buttonClicked = true;
         return true;
       }
     }

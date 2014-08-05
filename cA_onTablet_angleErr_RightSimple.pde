@@ -15,11 +15,11 @@ boolean first;
 
 boolean inHere = true;
 
-MyButton nextButton;
-int nextButtonX = 1280 - 100;
-int nextButtonY = 0;
-int nextButtonWidth = 100;
-int nextButtonHeight = 50;
+MyButton doneButton;
+int doneButtonX = 1280 - 100;
+int doneButtonY = 0;
+int doneButtonWidth = 100;
+int doneButtonHeight = 50;
 
 void setup() {
   first = true;
@@ -37,7 +37,7 @@ void setup() {
   yTouch = new float [10]; // Don't use more than ten fingers
   sqrtL = new float[4]; 
   sqrtR = new float[4];
-  nextButton = new MyButton(nextButtonX, nextButtonY, nextButtonWidth, nextButtonHeight, "DONE");
+  doneButton = new MyButton(doneButtonX, doneButtonY, doneButtonWidth, doneButtonHeight, "DONE");
   dataLoggerInit();
 }
 
@@ -47,11 +47,12 @@ void draw() {
   iter=0;// variable to store the actions
   background(255);
   firstTrue();
-  nextButton.draw();
-  if (nextButton.isStopClicked())
+  doneButton.draw();
+  if (doneButton.isStopClicked())
   {
     reInitializeTouchPoints();
     saveLoggedData();
+    
   }
 
 
@@ -66,7 +67,7 @@ void draw() {
     saveLoggedData();
 
   if ((degrees(angle1_)<2)&&(degrees(angle1_)>-2))
-    logData(111111, 111111, 111111, 111111);
+    logData(111111, 111111, 0, 111111);
 }
 
 void firstTrue() //white left body
