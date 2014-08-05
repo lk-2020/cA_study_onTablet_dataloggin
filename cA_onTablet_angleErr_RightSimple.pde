@@ -66,7 +66,7 @@ void draw() {
     saveLoggedData();
 
   if ((degrees(angle1_)<2)&&(degrees(angle1_)>-2))
-    logData(111111, 111111, 111111, 111111, 111111);
+    logData(111111, 111111, 111111, 111111);
 }
 
 void firstTrue() //white left body
