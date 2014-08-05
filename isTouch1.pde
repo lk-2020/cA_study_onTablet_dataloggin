@@ -15,7 +15,7 @@ void ifTouchEventIs1()
 
   if ((rightHandJoint0<bufferArea)&&(rightHandJoint1<whiteHandLength+bufferArea)&&(rightHandJoint1>whiteHandLength-bufferArea)) // right joint id touchId[0]
   {
-    //logData(0, 0, (int)xTouch[0], (int)yTouch[0]);
+    logData(0, 0, (int)xTouch[0], (int)yTouch[0]);
     whiteRightHandEndX = (int)xTouch[0];
     whiteRightHandEndY = (int)yTouch[0];
     dx1 = xTouch[0] - whiteRightHandJointX;

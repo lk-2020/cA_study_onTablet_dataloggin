@@ -13,15 +13,13 @@ int rec = 0;
 color skeletonColor = 50;
 boolean first;
 
-int num;
+boolean inHere = true;
 
-
-
-color[] templateColor = {
-  color(255, 255, 0)/*yellow*/, color(125, 193, 255)/*pink*/, color(184, 20, 103)/*blue*/
-};
-
-boolean inHere = false;
+MyButton nextButton;
+int nextButtonX = 1280 - 100;
+int nextButtonY = 0;
+int nextButtonWidth = 100;
+int nextButtonHeight = 50;
 
 void setup() {
   first = true;
@@ -31,21 +29,15 @@ void setup() {
   orientation(LANDSCAPE);
   background(0);
   fill(0, 0, 244);
-  //rect(100, 100, 100, 100);
   stroke(255);
   rectMode(CENTER);
-  //ellipseMode(CORNERS);
 
   // Initialize Multitouch x y arrays
   xTouch = new float [10];
-  yTouch = new float [10]; // Don't use more than ten fingers!
-  x1Touch = new float [10];
-  y1Touch = new float [10];
-  x2Touch = new float [10];
-  y2Touch = new float [10];
+  yTouch = new float [10]; // Don't use more than ten fingers
   sqrtL = new float[4]; 
   sqrtR = new float[4];
-  
+  nextButton = new MyButton(nextButtonX, nextButtonY, nextButtonWidth, nextButtonHeight, "DONE");
   dataLoggerInit();
 }
 
@@ -55,6 +47,12 @@ void draw() {
   iter=0;// variable to store the actions
   background(255);
   firstTrue();
+  nextButton.draw();
+  if (nextButton.isStopClicked())
+  {
+    reInitializeTouchPoints();
+    saveLoggedData();
+  }
 
 
   //drawBlueCirclesOnTouch();
@@ -64,6 +62,11 @@ void draw() {
     ifTouchEventIs1();
   if (TouchEvents == 2)
     ifTouchEventIs2();
+  if (TouchEvents == 4)
+    saveLoggedData();
+
+  if ((degrees(angle1_)<2)&&(degrees(angle1_)>-2))
+    logData(111111, 111111, 111111, 111111, 111111);
 }
 
 void firstTrue() //white left body
@@ -75,10 +78,12 @@ void firstTrue() //white left body
 
   if ((first == true))
   {   
+    angle1_ = 0;
+    angle2_ = radians(180);
     strokeWeight(25);
     stroke(skeletonColor);
-    line(whiteRightHandJointX, whiteRightHandJointY, whiteRightHandEndX, whiteRightHandEndY); //white right hand skeleton
-    line(whiteLeftHandJointX, whiteRightHandJointY, whiteLeftHandEndX, whiteLeftHandEndY); //white left hand skeleton
+    segment(whiteRightHandJointX, whiteRightHandJointY, angle1_, whiteHandLength); //white right hand skeleton
+    segment(whiteLeftHandJointX, whiteRightHandJointY, angle2_, whiteHandLength); //white left hand skeleton
   }
 }
 
@@ -95,5 +100,4 @@ void reInitializeTouchPoints()
   xTouch[0] = 0.0;
   yTouch[0] = 0.0;
 }
-
 
